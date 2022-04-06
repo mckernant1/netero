@@ -21,7 +21,7 @@ brew install mckernant1/tap/netero
 
 Sample Command
 ```bash
-mumen punch --url http://localhost:8000\
+netero punch --url http://localhost:8000\
 	--rps 20\
 	--duration 20\
 	--duration-unit second\
