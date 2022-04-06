@@ -10,7 +10,7 @@ Load testing tool written in rust for fun. Possibly extensible, but I have not m
 
 Install via brew
 ```bash
-brew install mckernant1/tap/saitama
+brew install mckernant1/tap/mumen
 ```
 
 # Punch
@@ -21,7 +21,7 @@ brew install mckernant1/tap/saitama
 
 Sample Command
 ```bash
-saitama punch --url http://localhost:8000\
+mumen punch --url http://localhost:8000\
 	--rps 20\
 	--duration 20\
 	--duration-unit second\
@@ -31,8 +31,8 @@ saitama punch --url http://localhost:8000\
 ## User Manual
 
 ```
-saitama punch --help                                            
-saitama-punch 0.0.1
+mumen punch --help                                            
+mumen-punch 0.0.1
 Load test against an endpoint
 
 USAGE:
