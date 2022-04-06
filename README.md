@@ -28,6 +28,17 @@ netero punch --url http://localhost:8000\
 	--method get
 ```
 
+## Use with jq
+
+You can use jq to merge the resulting json lines together into a single json object
+```bash
+netero punch --url http://localhost:8000\
+        --rps 20\
+        --duration 5\
+        --duration-unit second\
+        --method get | jq -s
+```
+
 ## User Manual
 
 ```
