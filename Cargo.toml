@@ -13,7 +13,7 @@ log = "0.4.16"
 simplelog = "0.11.2"
 reqwest = { version = "0.11.10", features = ["blocking", "json"] }
 clap-verbosity-flag = "1.0.0"
-saitama = "0.0.3"
+saitama = "0.0.4"
 
 [dependencies]
 crossbeam = "0.8.1"
@@ -23,4 +23,4 @@ log = "0.4.16"
 simplelog = "0.11.2"
 reqwest = { version = "0.11.10", features = ["blocking", "json"] }
 clap-verbosity-flag = "1.0.0"
-saitama = "0.0.3"
+saitama = "0.0.4"

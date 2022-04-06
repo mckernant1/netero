@@ -779,9 +779,9 @@ checksum = "73b4b750c782965c211b42f022f59af1fbceabdd026623714f104152f1ec149f"
 
 [[package]]
 name = "saitama"
-version = "0.0.3"
+version = "0.0.4"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "7d94f7cb036ce2b583e340eca6e78458f6f1bd464202a4eb8f6e91d43cff8ac2"
+checksum = "a1ef78e66507c8322be9502583e3234bc04d37ba1c7d76f5edbb9858130c1ab3"
 dependencies = [
  "chrono",
  "crossbeam",
