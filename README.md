@@ -1,4 +1,4 @@
-# Saitama
+# Mumen
 Load testing tool written in rust for fun. Possibly extensible, but I have not made a crate yet.
 
 
