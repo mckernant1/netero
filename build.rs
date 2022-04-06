@@ -12,6 +12,6 @@ mod args;
 fn main() {
     let mut command = Cli::command();
     fs::create_dir_all("completions").unwrap();
-    generate_to(Shell::Zsh, &mut command, "saitama", "completions").unwrap();
-    generate_to(Shell::Bash, &mut command, "saitama", "completions").unwrap();
+    generate_to(Shell::Zsh, &mut command, "mumen", "completions").unwrap();
+    generate_to(Shell::Bash, &mut command, "mumen", "completions").unwrap();
 }
