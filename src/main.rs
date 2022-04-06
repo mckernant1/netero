@@ -4,8 +4,8 @@ use commands::punch;
 use log::debug;
 use simplelog::{ColorChoice, CombinedLogger, Config, TermLogger, TerminalMode};
 
-mod args;
-mod commands;
+pub mod args;
+pub mod commands;
 
 fn main() {
     let args: Cli = Cli::parse();
