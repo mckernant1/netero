@@ -10,7 +10,7 @@ Load testing tool written in rust for fun. Possibly extensible, but I have not m
 
 Install via brew
 ```bash
-brew install mckernant1/tap/mumen
+brew install mckernant1/tap/netero
 ```
 
 # Punch
@@ -31,12 +31,12 @@ mumen punch --url http://localhost:8000\
 ## User Manual
 
 ```
-mumen punch --help                                            
-mumen-punch 0.0.1
+netero punch --help                                            
+netero-punch 0.0.1
 Load test against an endpoint
 
 USAGE:
-    saitama punch [OPTIONS] --url <URL> --rps <RPS> --duration <DURATION>
+    netero punch [OPTIONS] --url <URL> --rps <RPS> --duration <DURATION>
 
 OPTIONS:
     -b, --body <BODY>
