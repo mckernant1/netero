@@ -1,4 +1,5 @@
 use std::collections::{HashMap};
+use std::process::exit;
 use std::thread;
 use std::thread::{JoinHandle};
 use chrono::{Duration, Utc};
@@ -11,7 +12,8 @@ use crate::args::aggregate::{Aggregate};
 
 pub fn aggregate(a: Aggregate) {
     if !a.is_valid() {
-        error!("Either one aggregation must be specified")
+        error!("Either one aggregation must be specified");
+        exit(1);
     }
 
     let (stdin_send, stdin_recv) = channel::unbounded::<Option<String>>();

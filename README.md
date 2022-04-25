@@ -1,6 +1,5 @@
 # Netero
-Load testing tool written in rust for fun. Possibly extensible, but I have not made a crate yet.
-
+Load testing tool written in rust for fun.
 
 # Install
 
@@ -13,7 +12,7 @@ Install via brew
 brew install mckernant1/tap/netero
 ```
 
-# Punch
+# Usage
 
 ---
 
@@ -38,13 +37,18 @@ netero punch --url http://localhost:8000\
 	--rps 20\
 	--duration 20\
 	--duration-unit second\
-	--method get | netero aggregate -c="response_code" -P=0,50,90,99,99.99:latency
+	--method get | 
+	netero aggregate\
+	-c="response_code"\
+	-P=0,50,90,99,99.99:latency |
+	jq
 ```
 
 
 ## Use with jq
 
 You can use jq to merge the resulting json lines together into a single json object
+
 ```bash
 netero punch --url http://localhost:8000\
         --rps 20\
