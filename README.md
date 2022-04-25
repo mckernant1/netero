@@ -17,9 +17,9 @@ brew install mckernant1/tap/netero
 
 ---
 
-## Example
+## Drive Traffic
 
-Sample Command
+
 ```bash
 netero punch --url http://localhost:8000\
 	--rps 20\
@@ -27,6 +27,20 @@ netero punch --url http://localhost:8000\
 	--duration-unit second\
 	--method get
 ```
+
+
+## Aggregate
+
+Aggregates data and prints out aggregated json
+
+```bash
+netero punch --url http://localhost:8000\
+	--rps 20\
+	--duration 20\
+	--duration-unit second\
+	--method get | netero aggregate -c="response_code" -P=0,50,90,99,99.99:latency
+```
+
 
 ## Use with jq
 

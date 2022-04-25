@@ -1,5 +1,6 @@
 use crate::args::punch::Punch;
 use clap::{Parser, Subcommand};
+use crate::args::aggregate::Aggregate;
 
 #[derive(Parser, Debug)]
 #[clap(author, version, about, long_about = None)]
@@ -16,4 +17,6 @@ pub struct Cli {
 pub enum Commands {
     /// Load test against an endpoint
     Punch(Punch),
+    /// Aggregate JSON
+    Aggregate(Aggregate)
 }

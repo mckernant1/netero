@@ -1,11 +1,9 @@
-use crate::args::args::{Cli, Commands};
 use clap::Parser;
-use commands::punch;
 use log::debug;
-use simplelog::{ColorChoice, CombinedLogger, Config, TermLogger, TerminalMode};
+use simplelog::{ColorChoice, CombinedLogger, TermLogger, TerminalMode, ConfigBuilder};
+use netero::args::args::{Cli, Commands};
+use netero::commands::{aggregate, punch};
 
-pub mod args;
-pub mod commands;
 
 fn main() {
     let args: Cli = Cli::parse();
@@ -13,17 +11,17 @@ fn main() {
     let log_level = args.verbose.log_level_filter();
     CombinedLogger::init(vec![TermLogger::new(
         log_level,
-        Config::default(),
-        TerminalMode::Mixed,
+        ConfigBuilder::new()
+            .set_time_to_local(true)
+            .build(),
+        TerminalMode::Stderr,
         ColorChoice::Auto,
-    )])
-    .expect("Logger failed to instantiate");
+    )]).expect("Logger failed to instantiate");
 
     debug!("Got Command {:?}", command);
 
     match command {
-        Commands::Punch(p) => {
-            punch::punch(p);
-        }
+        Commands::Punch(p) => punch::punch(p),
+        Commands::Aggregate(a) => aggregate::aggregate(a)
     };
 }
