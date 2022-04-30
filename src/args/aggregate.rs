@@ -1,14 +1,13 @@
+use clap::Args;
+use regex::Regex;
 use std::fmt::Error;
 use std::hash::{Hash, Hasher};
-use std::num::{ParseFloatError};
+use std::num::ParseFloatError;
 use std::str::FromStr;
-use clap::{Args};
-use regex::Regex;
 
 /// Aggregates streaming data into
 #[derive(Args, Debug, Clone)]
 pub struct Aggregate {
-
     /// Period in seconds
     #[clap(short, long, default_value_t = 1)]
     pub period: u64,

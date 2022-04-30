@@ -1,10 +1,10 @@
 use chrono::Duration;
+use clap::{ArgEnum, Args};
 use log::error;
 use reqwest::blocking::{Client, Request};
 use reqwest::header::{HeaderMap, HeaderName, HeaderValue};
 use saitama::model::http_config::HttpLoadConfig;
 use std::str::FromStr;
-use clap::{ArgEnum, Args};
 
 #[derive(Args, Debug, Clone)]
 pub struct Punch {

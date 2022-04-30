@@ -1,3 +1,4 @@
+use crate::args::punch::Punch;
 use crossbeam::channel;
 use log::info;
 use saitama::model::request_record::RequestRecord;
@@ -9,7 +10,6 @@ use saitama::worker::http_worker::HttpWorker;
 use saitama::worker::worker::Worker;
 use std::thread;
 use std::thread::JoinHandle;
-use crate::args::punch::Punch;
 
 pub fn punch(punch: Punch) {
     let (work_send, work_recv) = channel::bounded::<bool>(1);
