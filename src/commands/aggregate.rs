@@ -6,7 +6,7 @@ use crossbeam::channel::{Receiver, Sender};
 use log::{debug, error};
 use mckernant1_tools::crossbeam::stdin_reader;
 use serde_json::json;
-use std::collections::HashMap;
+use std::collections::{BTreeMap, HashMap};
 use std::process::exit;
 use std::thread;
 use std::thread::JoinHandle;
@@ -36,7 +36,7 @@ pub fn aggregate(a: Aggregate) {
             .map(|it| (it.clone().agg_key, percentile(grouped.clone(), it.clone())))
             .collect::<HashMap<String, HashMap<String, String>>>();
 
-        let mut j = HashMap::new();
+        let mut j = BTreeMap::new();
 
         if !counted.is_empty() {
             j.insert("counts".to_string(), json!(counted));

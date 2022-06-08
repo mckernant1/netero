@@ -30,20 +30,19 @@ pub fn punch(punch: Punch) {
             let feedback_send = feedback_send.clone();
             let punch = punch.clone();
 
-            let worker = HttpWorker::new(work_recv, output_send, feedback_send, punch.into());
             thread::Builder::new()
                 .name(format!("worker-thread-{}", i))
-                .spawn(move || worker.start())
+                .spawn(move || {
+                    HttpWorker::start(work_recv, output_send, feedback_send, punch.into())
+                })
         })
         .map(|j| j.expect("Worker Thread failed to launch"))
         .collect::<Vec<JoinHandle<()>>>();
 
     info!("Starting orchestrator thread");
-    let orchestrator =
-        ConstantHttpOrchestrator::new(work_send.clone(), feedback_recv.clone(), punch.into());
     let orchestrator_thread = thread::Builder::new()
         .name("orchestrator-thread".to_string())
-        .spawn(move || orchestrator.start())
+        .spawn(move || ConstantHttpOrchestrator::start(work_send, feedback_recv, punch.into()))
         .expect("Orchestrator Thread failed to launch");
 
     for x in worker_threads {
@@ -55,7 +54,4 @@ pub fn punch(punch: Punch) {
         .expect("Could not join orchestrator thread");
 
     output_thread.join().unwrap();
-    drop(feedback_recv);
-    drop(work_send);
-    drop(output_send);
 }

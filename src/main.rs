@@ -10,7 +10,7 @@ fn main() {
     let log_level = args.verbose.log_level_filter();
     CombinedLogger::init(vec![TermLogger::new(
         log_level,
-        ConfigBuilder::new().set_time_to_local(true).build(),
+        ConfigBuilder::new().set_time_offset_to_local().expect("Could not set timezone").build(),
         TerminalMode::Stderr,
         ColorChoice::Auto,
     )])
