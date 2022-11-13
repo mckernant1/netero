@@ -1,10 +1,12 @@
 use chrono::Duration;
-use clap::{ArgEnum, Args};
+use clap::{ValueEnum, Args};
 use log::error;
 use reqwest::blocking::{Client, Request};
 use reqwest::header::{HeaderMap, HeaderName, HeaderValue};
-use saitama::model::http_config::HttpLoadConfig;
 use std::str::FromStr;
+use saitama::impls::constant_rate_orchestrator::ConstantRateOrchestratorConfig;
+use saitama::impls::http_worker::HttpWorkerConfig;
+use saitama::traits::config::Config;
 
 #[derive(Args, Debug, Clone)]
 pub struct Punch {
@@ -17,7 +19,7 @@ pub struct Punch {
     headers: Vec<String>,
 
     /// HTTP method
-    #[clap(short, long, arg_enum, default_value_t = Method::Get)]
+    #[clap(short, long, value_enum, default_value_t = Method::Get)]
     method: Method,
 
     /// How many worker threads to start
@@ -33,7 +35,7 @@ pub struct Punch {
     duration: u64,
 
     /// What unit to run with the test
-    #[clap(short = 'n', long, arg_enum, default_value_t = ChronoUnit::Minute)]
+    #[clap(short = 'n', long, value_enum, default_value_t = ChronoUnit::Minute)]
     duration_unit: ChronoUnit,
 
     /// Body of the request
@@ -41,25 +43,21 @@ pub struct Punch {
     pub body: String,
 }
 
-impl Into<HttpLoadConfig> for Punch {
-    fn into(self) -> HttpLoadConfig {
-        HttpLoadConfig::new(self.thread_count, self.rps, self.get_duration())
-    }
-}
+impl Config for Punch {}
 
-impl Into<Request> for Punch {
-    fn into(self) -> Request {
+impl HttpWorkerConfig for Punch {
+    fn create_request(&self) -> Request {
         Client::new()
             .request(self.get_method(), self.url.clone())
             .headers(self.get_header_map())
-            .body(self.body)
+            .body(self.body.clone())
             .build()
             .expect("Failed to create request")
     }
 }
 
-impl Punch {
-    pub fn get_duration(&self) -> Duration {
+impl ConstantRateOrchestratorConfig for Punch {
+    fn get_duration(&self) -> Duration {
         match self.duration_unit {
             ChronoUnit::Second => Duration::seconds(self.duration as i64),
             ChronoUnit::Minute => Duration::minutes(self.duration as i64),
@@ -67,6 +65,16 @@ impl Punch {
         }
     }
 
+    fn get_rps(&self) -> u64 {
+        self.rps
+    }
+
+    fn get_thread_count(&self) -> u16 {
+        self.thread_count
+    }
+}
+
+impl Punch {
     pub fn get_method(&self) -> reqwest::Method {
         match self.method {
             Method::Options => reqwest::Method::OPTIONS,
@@ -108,14 +116,14 @@ impl Punch {
     }
 }
 
-#[derive(Copy, Clone, PartialEq, Eq, ArgEnum, Debug)]
+#[derive(Copy, Clone, PartialEq, Eq, ValueEnum, Debug)]
 pub enum ChronoUnit {
     Second,
     Minute,
     Hour,
 }
 
-#[derive(Copy, Clone, PartialEq, Eq, ArgEnum, Debug)]
+#[derive(Copy, Clone, PartialEq, Eq, ValueEnum, Debug)]
 pub enum Method {
     Options,
     Get,

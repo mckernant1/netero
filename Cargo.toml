@@ -1,36 +1,36 @@
 [package]
 name = "netero"
-version = "0.0.8"
+version = "0.0.9"
 edition = "2021"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [build-dependencies]
-clap = { version = "~3.1.8", features = ["derive", "color"] }
-clap_complete = "~3.1.1"
+clap = { version = "4.0.23", features = ["derive", "color"] }
+clap_complete = "4.0.5"
 chrono = "~0.4.19"
 log = "~0.4.17"
 simplelog = "~0.12.0"
 reqwest = { version = "~0.11.10", features = ["blocking", "json"] }
-clap-verbosity-flag = "~1.0.0"
-saitama = "0.0.8"
-regex = "~1.5.6"
+clap-verbosity-flag = "2.0.0"
+saitama = "0.0.13"
+regex = "1.7.0"
 
 [dependencies]
 crossbeam = "~0.8.1"
 chrono = "~0.4.19"
-clap = { version = "~3.1.8", features = ["derive", "color"] }
+clap = { version = "4.0.23", features = ["derive", "color"] }
 log = "~0.4.16"
 simplelog = "0.12.0"
 reqwest = { version = "~0.11.10", features = ["blocking", "json"] }
-clap-verbosity-flag = "~1.0.0"
-saitama = "0.0.8"
-regex = "~1.5.5"
-tokio = "~1.19.2"
+clap-verbosity-flag = "2.0.0"
+saitama = "0.0.13"
+regex = "1.7.0"
+tokio = "1.21.2"
 serde = "~1.0.137"
 serde_json = "~1.0.81"
 itertools = "0.10.3"
-statrs = "~0.15.0"
-tui = { version = "~0.18.0", features = ["crossterm"] }
-crossterm = "~0.23.2"
-mckernant1-tools = { version = "0.0.5", features = ["channels"] }
+statrs = "0.16.0"
+tui = { version = "0.19.0", features = ["crossterm"] }
+crossterm = "0.25.0"
+mckernant1-tools = { version = "0.0.6", features = ["channels"] }
